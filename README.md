@@ -1,40 +1,42 @@
-## Usage
+## Лабораторная работа номер 5
 
-This playbook will create a nginx rrobin balancing page for two pages (web1 and web2)
+В этой ветке можно найти ansible-файл, который выполняет следующие функции: 
 
-## Start
+Устанавливает на серверах web1 web2 nginx
+На серверах haproxy1, haproxy2 устанавливает и настраивает отказоустойчивую связку HAProxy+Keepalived
+На серверах web1, web2 Nginx работает по порту 8080 и отдает кастомную страницу
+На серверах с HAProxy ПО обеспечивает балансировку нагрузки серверов web1 и web2 в режиме round-robin.
 
-Before the installation we will need a custom CentOS7 virtual box image with SElinux disabled.
-
-### DON`T FORGET TO EDIT VagrantFile with path to your ssh folder
-
-## Installation
-
-Let's start our virtual machines with Vagrant. Make sure you are using the latest version of vagrant (2.2.19)
+## Для поднятия машин:
 
 ```
 vagrant up
 ```
-Then let's start our playbook
+Запуск сценария:
 
 ```
 ansible-playbook nginx
 ```
 
-## Post Installation
+## Балансировка:
 
-If have no errors on summary you can proceed to http://192.168.11.113 to see if your balancer works
+<img src="https://camo.githubusercontent.com/66d0e077c38e3ff231b928e5715934176f9c414ffa0092799dfa35315c3761f0/68747470733a2f2f692e6962622e636f2f4e724335636e532f77656262312e6a7067" >
+<img src="https://camo.githubusercontent.com/3e5a3bd939b549d3fc24977aaa15cd1bded7c080eb2ad60ba93a29aa258ffbea/68747470733a2f2f692e6962622e636f2f764c7a515167642f77656262322e6a7067" >
 
-It should look like this:
+## Отказоустойчивость:
 
-<a href="https://ibb.co/kq8VjL5"><img src="https://i.ibb.co/xzjKWnX/vagrant-result.png" alt="vagrant-result" border="0"></a>
+Суть отказоустойчивости в следующих действиях: c помощью команды "ip a" узнаем, на какую виртуальную машину назначен адрес 192.168.11.100. Выключаем. Работа не изменилась,значит все работает корректно.
 
-Try refreshing the page to see if numbers on page are changing. If they don`t change try using CTRL+F5 to refresh cache as well
+### Отключаем:
 
-Different page:
+<img src="https://i.ibb.co/179gtHm/Screenshot-from-2022-04-06-21-44-25.png" >
 
-<a href="https://ibb.co/qWb7P8v"><img src="https://i.ibb.co/9VRcC07/vagrant-sec-page.png" alt="vagrant-sec-page" border="0"></a>
+### Смотрим ip и проверяем работоспособность:
 
-## Done
+<img src="https://i.ibb.co/HYT1PXD/Screenshot-from-2022-04-06-21-52-55.png" >
 
-You can get yourself a coffee! ☕
+<img src="https://camo.githubusercontent.com/66d0e077c38e3ff231b928e5715934176f9c414ffa0092799dfa35315c3761f0/68747470733a2f2f692e6962622e636f2f4e724335636e532f77656262312e6a7067" >
+
+<img src="https://camo.githubusercontent.com/3e5a3bd939b549d3fc24977aaa15cd1bded7c080eb2ad60ba93a29aa258ffbea/68747470733a2f2f692e6962622e636f2f764c7a515167642f77656262322e6a7067" >
+
+ура ура победа
