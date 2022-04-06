@@ -2,4 +2,5 @@
 web1 ansible_host=192.168.11.111 
 web2 ansible_host=192.168.11.112 
 [balance]
-rrobin ansible_host=192.168.11.113
+proxy1 ansible_host=192.168.11.113 priority=101
+proxy2 ansible_host=192.168.11.114 priority=100
